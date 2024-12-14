@@ -10,38 +10,17 @@
   Any changes to README.md directly will result in a failure on CI.
 -->
 
-<h1 style="text-align: center">Angular CLI - The CLI tool for Angular.</h1>
-
-<p style="text-align: center">
-  <br>
-  <img src="/docs/images/angular-cli-logo.png" alt="Angular CLI logo" width="100px" height="108px"/>
-  <br><br>
-  <em>The Angular CLI is a command-line interface tool that you use to initialize, develop, scaffold,
-    <br>and maintain Angular applications directly from a command shell.</em>
-  <br>
-</p>
-
-<p style="text-align: center">
-  <a href="https://angular.dev/tools/cli"><strong>angular.dev/tools/cli</strong></a>
-  <br>
-</p>
-
-<p style="text-align: center">
-  <a href="CONTRIBUTING.md">Contributing Guidelines</a>
-  ·
-  <a href="https://github.com/angular/angular-cli/issues">Submit an Issue</a>
-  ·
-  <a href="https://blog.angular.dev">Blog</a>
-  <br>
-  <br>
-</p>
-
-<hr>
+* Angular CLI
+  * == CL interface tool /
+    * allows, about Angular applications,
+      * initialize,
+      * develop,
+      * scaffold,
+      * maintain
 
 ## Documentation
 
-Get started with Angular CLI, learn the fundamentals and explore advanced topics on our documentation website.
-
+* TODO:
 - [Getting started][quickstart]
 - [CLI][cli]
 - [Workspace and project file structure][filestructure]
@@ -49,7 +28,6 @@ Get started with Angular CLI, learn the fundamentals and explore advanced topics
 - [Schematics][schematics]
 
 ## Development Setup
-
 
 ### Prerequisites
 
@@ -131,9 +109,7 @@ Join the conversation and help the community.
 
 ## Packages
 
-This is a monorepo which contains many tools and packages:
-
-
+* this repo == monorepo / MANY tools & packages
 
 ### Tools
 
