@@ -1,8 +1,13 @@
-# Update Command
+# Update Command -- `ng update` --
 
-`ng update` is a new command in the CLI to update one or multiple packages, its peer dependencies, and the peer dependencies that depends on it.
+* allows
+  * 👀updating 👀
+    * +>=1 packages +
+    * packages' peer dependencies +
+    * package's peer dependencies / -- depends on -- it
 
-If there are inconsistencies, for example if peer dependencies cannot be matches by a simple semver range, the tool will error out (and nothing will be committed on the filesystem).
+* ❌if there are inconsistencies -> tool will error out & NOTHING committed | filesystem ❌
+  * _Example of inconsistency:_ peer dependencies -- can NOT be matches by a -- SIMPLE semver range
 
 ## Command Line Usage
 
@@ -10,7 +15,12 @@ If there are inconsistencies, for example if peer dependencies cannot be matches
 ng update <package1 [package2 [...]]> [options]
 ```
 
-You can specify more than one package. Each package follows the convention of `[@scope/]packageName[@version-range-or-dist-tag]`. Packages not found in your dependencies will trigger an error. Any package that has a higher version in your `package.json` will trigger an error.
+* packages
+  * 👀-- follows the convention of -- `[@scope/]packageName[@version-range-or-dist-tag]` 👀
+  * ❌NOT found | YOUR dependencies -> will trigger an error ❌
+  * ❌ / have a higher version | YOUR `package.json` -> will trigger an error ❌
+
+* TODO:
 
 | Flag             | Argument  | Description                                                                                                                                                                                 |
 | ---------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -22,13 +32,14 @@ You can specify more than one package. Each package follows the convention of `[
 
 ## Details
 
-The schematic performs the following steps, in order:
-
-1. Get all installed package names and versions from the `package.json` into `dependencyMap: Map<string, string>`.
-1. From that map, fetch all `package.json` from the NPM repository, which contains all versions, and gather them in a `Map<string, NpmPackageJson>`.
-1. At the same time, update the `Map<>` with the version of the package which is believed to be installed (largest version number matching the version range).
-1. **WARNING**: this might not be the exact installed versions, unfortunately. We should have a proper `package-lock.json` loader, and support `yarn.lock` as well, but these are stretch goals (and where do we stop).
-1. For each packages mentioned on the command line, update to the target version (by default largest non-beta non-rc version):
+* steps order / -- performed by -- schematic
+  1. from `package.json` -- get ALL installed package names & versions, and -- set | `dependencyMap: Map<string, string>`
+  2. from `dependencyMap: Map<string, string>` -- fetch ALL NPM repository's `package.json` / contains ALL versions, and -- gather them | `Map<string, NpmPackageJson>`
+  3. update the `Map<>`'s package version / believed to be installed ( == largest version number / match the version range)
+  4. believed installed version (could be) != exact installed versions
+     1. recommendations: have a proper `package-lock.json` loader & `yarn.lock`
+  5. / EACH packages mentioned | command line -- update to the -- target version
+     1. by default, largest NON-beta NON-rc version
 
 ```python
 # ARGV    The packages being requested by the user.
@@ -59,13 +70,20 @@ for p in ARGV:
 
 ## Library Developers
 
-Libraries are responsible for defining their own update schematics. The `ng update` tool will update the package.json, and if it detects the `"ng-update"` key in package.json of the library, will run the update schematic on it (with version information metadata).
+* Libraries
+  * -- responsible for defining -- their OWN update schematics
 
-If a library does not define the `"ng-update"` key in their package.json, they are considered not supporting the update workflow and `ng update` is basically equivalent to `npm install`.
+* `ng update` tool
+  * 👀if it detects the `"ng-update"` key | library's "package.json" -> will run the update schematic | it 👀
+  * 👀if `"ng-update"` key NOT defined | library's "package.json" ->
+    * NOT support the update workflow
+    * `ng update` == `npm install` 👀
 
 ### Migration
 
-In order to implement migrations in a library, the author must add the `ng-update` key to its `package.json`. This key contains the following fields:
+* TODO:
+In order to implement migrations in a library, the author must add the `ng-update` key to its `package.json`.
+This key contains the following fields:
 
 | Field Name         | Type                                      | Description                                                                                                                                                                                                                                                                                                                                                                            |
 | ------------------ | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -118,7 +136,10 @@ And create a migration collection (same schema as the Schematics collection):
 }
 ```
 
-The update tool would then read the current version of library installed, check against all `version` fields and run the schematics, until it reaches the version required by the user (inclusively). If such a collection is used to update from version 5 to version 7, the `01`, `02`, `03,` and `04` functions would be called. If the current version is 7 and a `--refactor-only` flag is passed, it would run the migration `04` only. More arguments are needed to know from which version you are updating.
+The update tool would then read the current version of library installed, check against all `version` fields and run the schematics, until it reaches the version required by the user (inclusively).
+If such a collection is used to update from version 5 to version 7, the `01`, `02`, `03,` and `04` functions would be called.
+If the current version is 7 and a `--refactor-only` flag is passed, it would run the migration `04` only.
+More arguments are needed to know from which version you are updating.
 
 Running `ng update @angular/core` would be the same as `ng generate @angular/core/migrations:migration-01`.
 
@@ -148,10 +169,11 @@ I have a dependency on Angular, Material and CLI. I want to update the CLI, then
 
 #### Details
 
-1. `ng update @angular/cli`.  
+1. `ng update @angular/cli`.
    Updates the CLI and packages that have a peer dependencies on the CLI (none), running refactoring tools from CLI 1 to 6.
-1. `ng update @angular/core`.  
-   Updates the Core package and all packages that have a peer dependency on it. This can get tricky if `@angular/material` get caught in the update because the version installed does not directly allow the new version of `@angular/core`. In this case
+1. `ng update @angular/core`.
+   Updates the Core package and all packages that have a peer dependency on it.
+   2. This can get tricky if `@angular/material` get caught in the update because the version installed does not directly allow the new version of `@angular/core`. In this case
 
 ### Complex Case
 
@@ -185,5 +207,6 @@ ng update @angular/material
 
 ## Notes
 
-1. if someone is on CLI 1.5, the command is not supported. The user needs to update to `@angular/cli@latest`, then `ng update @angular/cli`. Post install hook will check versions of cli configuration and show a message to run the `ng update` command.
+1. if someone is on CLI 1.5, the command is not supported. The user needs to update to `@angular/cli@latest`, then `ng update @angular/cli`.
+   1. Post install hook will check versions of cli configuration and show a message to run the `ng update` command.
 1. NPM proxies or cache are not supported by the first version of this command.
