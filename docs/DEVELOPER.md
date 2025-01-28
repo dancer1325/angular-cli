@@ -1,36 +1,29 @@
 # Building and Testing Angular CLI
 
-## Installation
+## Installation requirements
 
-To get started locally, follow these instructions:
-
-1. If you haven't done it already, [make a fork of this repo](https://github.com/angular/angular-cli/fork).
-1. Clone to your local computer using `git`.
-1. Make sure that you have Node `v18.19` or higher installed. See instructions [here](https://nodejs.org/en/download/).
-1. Make sure that you have `yarn` installed; see instructions [here](https://yarnpkg.com/lang/en/docs/install/).
-1. Run `yarn` (no arguments) from the root of your clone of this project to install dependencies.
+1. Node `v18.19+`
+   1. see [here](https://nodejs.org/en/download/)
+1. `yarn`
+   1. see [here](https://yarnpkg.com/lang/en/docs/install/)
+1. | root of this repo
+   ```
+   yarn
+   ```
 
 ## Building and Installing the CLI
 
-To make a local build:
+* `yarn build --local`
+  * local build / generate ".tar" | `dist/`
 
-```shell
-yarn build --local
-```
+* if you want to use the locally built tools | ANOTHER repo
+  * `npm install -D ${CLI_REPO}/dist/*.tgz`
+    * == install the locally built packages:
 
-This generates a number of tarballs in the `dist/` directory. To actually use
-the locally built tools, switch to another repository reproducing the specific
-issue you want to fix (or just generate a local repo with `ng new`). Then
-install the locally built packages:
-
-```shell
-cd "${EXAMPLE_ANGULAR_PROJECT_REPO}"
-npm install -D ${CLI_REPO}/dist/*.tgz
-```
-
-Builds of this example project will use tooling created from the previous local
-build and include any local changes. When using the CLI, it will automatically
-check for a local install and use that if present. This means you can just run:
+* TODO:
+Builds of this example project will use tooling created from the previous local build and include any local changes.
+When using the CLI, it will automatically check for a local install and use that if present.
+This means you can just run:
 
 ```shell
 npm install -g @angular/cli
