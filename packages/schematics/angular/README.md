@@ -1,9 +1,11 @@
 # @schematics/angular
 
-This package contains a collection of [schematics](/packages/angular_devkit/schematics/README.md)
-for generating an Angular application.
+* == collection of [schematics](/packages/angular_devkit/schematics/README.md) /
+  * 👀generate an Angular application 👀
 
 ## Schematics
+
+TODO:
 
 | Name           | Description                                                                                           |
 | -------------- | ----------------------------------------------------------------------------------------------------- |
@@ -28,4 +30,8 @@ for generating an Angular application.
 
 ## Disclaimer
 
-While the schematics when executed via the Angular CLI and their associated options are considered stable, the programmatic APIs are not considered officially supported and are not subject to the breaking change guarantees of SemVer.
+* schematics / executed -- via the
+  * Angular CLI & their associated options -- are considered stable
+  * ❌programmatic APIs -- are NOT
+    * officially supported
+    * subject -- to the -- breaking change guarantees of SemVer ❌
