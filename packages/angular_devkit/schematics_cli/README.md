@@ -1,49 +1,37 @@
 # Schematics CLI
 
-This package contains the executable for running a [Schematic](/packages/angular_devkit/schematics/README.md).
+* == executable -- for running -- a [Schematic](/packages/angular_devkit/schematics/README.md)
 
 # Usage
 
-```
-$ schematics [CollectionName:]SchematicName [options, ...]
-
-By default, if the collection name is not specified, use the internal collection provided
-by the Schematics CLI.
-
-Options:
-    --debug             Debug mode. This is true by default if the collection is a relative
-                        path (in that case, turn off with --debug=false).
-
-    --allow-private     Allow private schematics to be run from the command line. Default to
-                        false.
-
-    --dry-run           Do not output anything, but instead just show what actions would be
-                        performed. Default to true if debug is also true.
-
-    --force             Force overwriting files that would otherwise be an error.
-
-    --list-schematics   List all schematics from the collection, by name. A collection name
-                        should be suffixed by a colon. Example: '@angular-devkit/schematics-cli:'.
-
-    --no-interactive    Disables interactive input prompts.
-
-    --verbose           Show more information.
-
-    --help              Show this message.
-
-Any additional option is passed to the Schematics depending on its schema.
-```
+* `schematics [CollectionName:]SchematicName [options, ...]`
+  * if `[CollectionName:]` NOT specified -> use the internal collection -- provided by the -- Schematics CLI
+  * `options`
+    * `--debug`
+      * == debug mode
+      * if the collection is a relative path -> by default, it's `true`
+    * `--allow-private`
+      * from the command line, allow private schematics -- to be -- run
+      * by default, `false`
+    * `--dry-run`
+      * NOT output anything
+      * show what actions -- would be -- performed
+      * if `debug==true` -> by default, `true`
+    * `--force`
+      * force overwriting files / -- would otherwise be an -- error
+    * `--list-schematics`
+      * list ALL collection's schematics -- by -- name
+        * collection name -- should be suffixed by a -- colon
+          * _Example:_ '@angular-devkit/schematics-cli:'
+    * `--no-interactive`
+      * disables interactive input prompts
+    * `--verbose`
+      * show MORE information
+    * `--help`
 
 # Examples
 
-1. Create a new NPM package that contains a blank schematic.
-
-```sh
-$ schematics blank <name>
-```
-
-2. Walkthrough example that demonstrates how to build a schematic.
-
-```sh
-$ schematics schematic --name <name>
-```
+* `schematics blank <name>`
+  * create a NEW NPM package / contains a blank schematic
+* `schematics schematic --name <name>`
+  * how to build a schematic
