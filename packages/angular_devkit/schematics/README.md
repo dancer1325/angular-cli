@@ -1,65 +1,103 @@
 # Schematics
 
-> A scaffolding library for the modern web.
+* := scaffolding library
+  * -- for the -- modern web
+  * ❌-> NOT work by itself ❌
 
 ## Description
 
-Schematics are generators that transform an existing filesystem. They can create files, refactor existing files, or move files around.
-
-What distinguishes Schematics from other generators, such as Yeoman or Yarn Create, is that schematics are purely descriptive; no changes are applied to the actual filesystem until everything is ready to be committed. There is no side effect, by design, in Schematics.
+* Schematics
+  * == generators /
+    * about EXITING filesystem, can
+      * refactor
+      * move them around
+    * can create files
+  * vs OTHER generators (_Example:_ Yeoman or Yarn Create)
+    * purely descriptive
+    * ONCE (NOT BEFORE) ALL is ready to be committed -> changes are applied | ACTUAL filesystem
+  * 👀NO side effect, by design 👀
 
 # Glossary
 
-| Term           | Description                                                                                                                                                                                                                                                                                                                 |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Schematics** | A generator that executes descriptive code without side effects on an existing file system.                                                                                                                                                                                                                                 |
-| **Collection** | A list of schematics metadata. Schematics can be referred by name inside a collection.                                                                                                                                                                                                                                      |
-| **Tool**       | The code using the Schematics library.                                                                                                                                                                                                                                                                                      |
-| **Tree**       | A staging area for changes, containing the original file system, and a list of changes to apply to it.                                                                                                                                                                                                                      |
-| **Rule**       | A function that applies actions to a `Tree`. It returns a new `Tree` that will contain all transformations to be applied.                                                                                                                                                                                                   |
-| **Source**     | A function that creates an entirely new `Tree` from an empty filesystem. For example, a file source could read files from disk and create a Create Action for each of those.                                                                                                                                                |
-| **Action**     | An atomic operation to be validated and committed to a filesystem or a `Tree`. Actions are created by schematics.                                                                                                                                                                                                           |
-| **Sink**       | The final destination of all `Action`s.                                                                                                                                                                                                                                                                                     |
-| **Task**       | A Task is a way to execute an external command or script in a schematic. A Task can be used to perform actions such as installing dependencies, running tests, or building a project. A Task is created by using the `SchematicContext` object and can be scheduled to run before or after the schematic `Tree` is applied. |
+| Term           | Description                                                                                                                                                                                                                                                                                                                                    |
+| -------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Schematics** | == generator / executes descriptive code <br/> &nbsp; WITHOUT side effects <br/> &nbsp; on EXISTING file system                                                                                                                                                                                                                                |
+| **Collection** | == list of schematics metadata / schematics -- can be referred by -- name                                                                                                                                                                                                                                                                      |
+| **Tool**       | == code / use the Schematics library                                                                                                                                                                                                                                                                                                           |
+| **Tree**       | == staging area for changes / contains <br/> &nbsp; the original file system <br/> &nbsp; list of changes to apply to it                                                                                                                                                                                                                       |
+| **Rule**       | == function / <br/> &nbsp; applies actions to a `Tree` <br/> &nbsp; returns a NEW `Tree` / will contain ALL transformations to be applied                                                                                                                                                                                                      |
+| **Source**     | == function / <br/> &nbsp; from an EMPTY filesystem -- creates an -- entirely NEW `Tree` <br/> _Example:_ file source / from disk read files & create a Create Action / EACH read file                                                                                                                                                         |
+| **Action**     | == atomic operation / <br/> &nbsp; -- to be validated & committed to a -- filesystem or a `Tree` <br/> &nbsp; created by schematics                                                                                                                                                                                                            |
+| **Sink**       | == ALL `Action`s final destination                                                                                                                                                                                                                                                                                                             |
+| **Task**       | == way to execute an external command or script in a schematic <br/> &nbsp; -- created by using the -- `SchematicContext` object <br/> &nbsp; can be scheduled to run BEFORE or AFTER the schematic `Tree` is applied  <br/> uses <br/> &nbsp; perform actions (_Example:_ installing dependencies, running tests, or building a project) |
 
 # Tooling
 
-Schematics is a library, and does not work by itself. A [reference CLI](https://github.com/angular/angular-cli/blob/main/packages/angular_devkit/schematics_cli/bin/schematics.ts) is available on this repository, and is published on NPM at [@angular-devkit/schematics-cli](https://www.npmjs.com/package/@angular-devkit/schematics-cli). This document explains the library usage and the tooling API, but does not go into the tool implementation itself.
+* goal here
+  * library usage
+  * tooling API / NOT go into the tool implementation itself
 
-The tooling is responsible for the following tasks:
+* [Schematics CLI](../schematics_cli)
+  * published | [NPM's @angular-devkit/schematics-cli](https://www.npmjs.com/package/@angular-devkit/schematics-cli)
+  * responsible for
+    1. TODO: Create the Schematic Engine, and pass in a Collection and Schematic loader.
+    1. Understand and respect the Schematics metadata and dependencies between collections. Schematics can refer to dependencies, and it's the responsibility of the tool to honor those dependencies.
+       2. The reference CLI uses NPM packages for its collections.
+    1. Create the Options object.
+       2. Options can be anything, but the schematics can specify a JSON Schema that should be respected.
+       3. The reference CLI, for example, parses the arguments as a JSON object and validates it with the Schema specified by the collection.
+    1. Schematics provides some JSON Schema formats for validation that tooling should add.
+       2. These validate paths, html selectors and app names.
+       3. Please check the reference CLI for how these can be added.
+    1. Call the schematics with the original Tree.
+       2. The tree should represent the initial state of the filesystem.
+       3. The reference CLI uses the current directory for this.
+    1. Create a Sink and commit the result of the schematics to the Sink.
+       2. Many sinks are provided by the library; FileSystemSink and DryRunSink are examples.
+    1. Output any logs propagated by the library, including debugging information.
 
-1. Create the Schematic Engine, and pass in a Collection and Schematic loader.
-1. Understand and respect the Schematics metadata and dependencies between collections. Schematics can refer to dependencies, and it's the responsibility of the tool to honor those dependencies. The reference CLI uses NPM packages for its collections.
-1. Create the Options object. Options can be anything, but the schematics can specify a JSON Schema that should be respected. The reference CLI, for example, parses the arguments as a JSON object and validates it with the Schema specified by the collection.
-1. Schematics provides some JSON Schema formats for validation that tooling should add. These validate paths, html selectors and app names. Please check the reference CLI for how these can be added.
-1. Call the schematics with the original Tree. The tree should represent the initial state of the filesystem. The reference CLI uses the current directory for this.
-1. Create a Sink and commit the result of the schematics to the Sink. Many sinks are provided by the library; FileSystemSink and DryRunSink are examples.
-1. Output any logs propagated by the library, including debugging information.
+* tooling API's components
+  * [`SchematicEngine`](#engine----schematicengine---)
 
-The tooling API is composed of the following pieces:
+## Engine -- `SchematicEngine` --
 
-## Engine
-
-The `SchematicEngine` is responsible for loading and constructing `Collection`s and `Schematics`. When creating an engine, the tooling provides an `EngineHost` interface that understands how to create a `CollectionDescription` from a name, and how to create a `SchematicDescription`.
+* `SchematicEngine`
+  * -- responsible for --
+    * loading & constructing
+      * `Collection`s
+      * `Schematics`
+  * | create an engine, the tooling -- provides an -- `EngineHost` interface / understands how
+    * from a name -- create -- a `CollectionDescription`
+    * create a `SchematicDescription`
 
 # Schematics (Generators)
 
-Schematics are generators and part of a `Collection`.
+* Schematics
+  * == generators
+  * == part of a `Collection`
 
-## Collection
+## Collection -- `collection.json` --
 
-A Collection is defined by a `collection.json` file (in the reference CLI). This JSON defines the following properties:
+* place |  reference CLI (❓)
+* 's properties
 
-| Prop Name   | Type     | Description                 |
-| ----------- | -------- | --------------------------- |
-| **name**    | `string` | The name of the collection. |
-| **version** | `string` | Unused field.               |
+| Prop Name   | Type     | Description     |
+| ----------- | -------- |-----------------|
+| **name**    | `string` | collection name |
+| **version** | `string` | unused field    |
 
 ## Schematic
 
 # Operators, Sources and Rules
 
-A `Source` is a generator of a `Tree`; it creates an entirely new root tree from nothing. A `Rule` is a transformation from one `Tree` to another. A `Schematic` (at the root) is a `Rule` that is normally applied on the filesystem.
+* `Source`
+  * == generator of a `Tree` / from nothing -- creates an -- entirely NEW root tree
+* `Rule`
+  * == transformation / from one `Tree` -- to -- another `Tree`
+  * [`Rule`](src/engine/interface.ts#L73)
+* `Schematic`
+  * | root
+  * == `Rule` / normally applied | filesystem
 
 ## Operators
 
@@ -131,13 +169,19 @@ The system operates on placeholders defined inside files or their paths as loade
 
 # Examples
 
+* TODO: add | real project?
+
 ## Simple
 
-An example of a simple Schematics which creates a "hello world" file, using an option to determine its path:
+* Schematics /
+  * creates a "hello world" file
+  * determine -- via an option -- its path
 
 ```typescript
 import { Tree } from '@angular-devkit/schematics';
 
+// options      ==    list options -- from the -- tooling
+// returns a Rule   == transformation / from a `Treee` -- to -- ANOTHER `Tree`
 export default function MySchematic(options: any) {
   return (tree: Tree) => {
     tree.create(options.path + '/hi', 'Hello world!');
@@ -146,14 +190,9 @@ export default function MySchematic(options: any) {
 }
 ```
 
-A few things from this example:
-
-1. The function receives the list of options from the tooling.
-1. It returns a [`Rule`](src/engine/interface.ts#L73), which is a transformation from a `Tree` to another `Tree`.
-
 ## Templating
 
-A simplified example of a Schematics which creates a file containing a new Class, using an option to determine its name:
+* Schematics / creates -- via passing an option for the name, a -- file containing a new Class
 
 ```typescript
 // files/__name@dasherize__.ts
@@ -201,5 +240,6 @@ Additional things from this example:
 
 1. `strings` provides the used `dasherize` and `classify` functions, among others.
 1. The files are on-disk in the same root directory as the `index.ts` and loaded into a `Tree`.
-1. Then the `template` `Rule` fills in the specified templating placeholders. For this, it only knows about the variables and functions passed to it via the options-object.
+1. Then the `template` `Rule` fills in the specified templating placeholders.
+   2. For this, it only knows about the variables and functions passed to it via the options-object.
 1. Finally, the resulting `Tree`, containing the new file, is merged with the existing files of the project which the Schematic is run on.
