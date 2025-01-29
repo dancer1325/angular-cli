@@ -5,28 +5,26 @@
 
 ## Schematics
 
-TODO:
-
-| Name           | Description                                                                                           |
-| -------------- | ----------------------------------------------------------------------------------------------------- |
-| app-shell      | Generates an app shell for running a server-side version of an app                                    |
-| application    | Generates a new basic app definition in the "projects" subfolder of the workspace                     |
-| class          | Creates a new, generic class definition in the given project                                          |
-| component      | Creates a new, generic component definition in the given project                                      |
-| directive      | Creates a new, generic directive definition in the given project                                      |
-| enum           | Generates a new, generic enum definition in the given project                                         |
-| guard          | Generates a new, generic route guard definition in the given project                                  |
-| interceptor    | Creates a new, generic interceptor definition in the given project                                    |
-| interface      | Creates a new, generic interface definition in the given project                                      |
-| library        | Creates a new, generic library project in the current workspace                                       |
-| module         | Creates a new, generic NgModule definition in the given project                                       |
-| ng-new         | Creates a new project by combining the workspace and application schematics                           |
-| pipe           | Creates a new, generic pipe definition in the given project                                           |
-| resolver       | Creates a new, generic resolver definition in the given project                                       |
-| service        | Creates a new, generic service definition in the given project                                        |
-| service-worker | Pass this schematic to the "run" command to create a service worker                                   |
-| web-worker     | Creates a new, generic web worker definition in the given project                                     |
-| workspace      | Initializes an empty workspace and adds the necessary dependencies required by an Angular application |
+| Name           | Description                                                                                                 |
+|----------------|-------------------------------------------------------------------------------------------------------------|
+| app-shell      | Generates an app shell / runs a server-side version of an app                                               |
+| application    | Generates a NEW basic app definition in the workspace's "projects/"                                         |
+| class          | Creates a NEW, generic class definition in the GIVEN project                                                |
+| component      | Creates a NEW, generic component definition in the GIVEN project                                            |
+| directive      | Creates a NEW, generic directive definition in the GIVEN project                                            |
+| enum           | Generates a NEW, generic enum definition in the GIVEN project                                               |
+| guard          | Generates a NEW, generic route guard definition in the GIVEN project                                        |
+| interceptor    | Creates a NEW, generic interceptor definition in the GIVEN project                                          |
+| interface      | Creates a NEW, generic interface definition in the GIVEN project                                            |
+| library        | Creates a NEW, generic library project in the CURRENT workspace                                             |
+| module         | Creates a NEW, generic NgModule definition in the GIVEN project                                             |
+| ng-new         | Creates a NEW project -- by combining the -- workspace + application schematics                             |
+| pipe           | Creates a NEW, generic pipe definition in the GIVEN project                                                 |
+| resolver       | Creates a NEW, generic resolver definition in the GIVEN project                                             |
+| service        | Creates a NEW, generic service definition in the GIVEN project                                              |
+| service-worker | Creates a service worker -- by passing this schematic to the -- `run` command                               |
+| web-worker     | Creates a NEW, generic web worker definition in the GIVEN project                                           |
+| workspace      | Initializes an EMPTY workspace and adds the necessary dependencies -- required by an -- Angular application |
 
 ## Disclaimer
 
