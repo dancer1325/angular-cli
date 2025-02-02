@@ -81,67 +81,71 @@ for p in ARGV:
 
 ### Migration
 
-* TODO:
-In order to implement migrations in a library, the author must add the `ng-update` key to its `package.json`.
-This key contains the following fields:
+* steps
+  * | `package.json`,
+    * add the `ng-update` key
 
-| Field Name         | Type                                      | Description                                                                                                                                                                                                                                                                                                                                                                            |
-| ------------------ | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `requirements`     | `{ [packageName: string]: VersionRange }` | A map of package names to version to check for minimal requirement. If one of the libraries listed here does not match the version range specified in `requirements`, an error will be shown to the user to manually update those libraries. For example, `@angular/core` does not support updates from versions earlier than 5, so this field would be `{ '@angular/core': '>= 5' }`. |
-| `migrations`       | `string`                                  | A relative path (or resolved using Node module resolution) to a Schematics collection definition.                                                                                                                                                                                                                                                                                      |
-| `packageGroup`     | `string[]`                                | A list of npm packages that are to be grouped together. When running the update schematic it will automatically include all packages as part of the packageGroup in the update (if the user also installed them).                                                                                                                                                                      |
-| `packageGroupName` | `string`                                  | The name of the packageGroup to use. By default, uses the first package in the packageGroup. The packageGroupName needs to be part of the packageGroup and should be a valid package name.                                                                                                                                                                                             |
+* `ng-update` fields
 
-#### Example given:
+| Field Name         | Type                                      | Description                                                                                                                                                                                                                                                                                                                                                                                 |
+| ------------------ | ----------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `requirements`     | `{ [packageName: string]: VersionRange }` | TODO:A map of package names to version to check for minimal requirement. If one of the libraries listed here does not match the version range specified in `requirements`, an error will be shown to the user to manually update those libraries. For example, `@angular/core` does not support updates from versions earlier than 5, so this field would be `{ '@angular/core': '>= 5' }`. |
+| `migrations`       | `string`                                  | A relative path (or resolved using Node module resolution) to a Schematics collection definition.                                                                                                                                                                                                                                                                                           |
+| `packageGroup`     | `string[]`                                | A list of npm packages that are to be grouped together. When running the update schematic it will automatically include all packages as part of the packageGroup in the update (if the user also installed them).                                                                                                                                                                           |
+| `packageGroupName` | `string`                                  | The name of the packageGroup to use. By default, uses the first package in the packageGroup. The packageGroupName needs to be part of the packageGroup and should be a valid package name.                                                                                                                                                                                                  |
 
-Library my-lib wants to have 2 steps to update from version 4 -> 4.5 and 4.5 to 5. It would add this information in its `package.json`:
+#### Example
 
-```json
-{
-  "ng-update": {
-    "requirements": {
-      "my-lib": "^5"
-    },
-    "migrations": "./migrations/migration-collection.json"
-  }
-}
-```
+* Library my-lib / 2 steps to update (4 to 4.5, 4.5 to 5)
 
-And create a migration collection (same schema as the Schematics collection):
-
-```json
-{
-  "schematics": {
-    "migration-01": {
-      "version": "6",
-      "factory": "./update-6"
-    },
-    "migration-02": {
-      "version": "6.2",
-      "factory": "./update-6_2"
-    },
-    "migration-03": {
-      "version": "6.3",
-      "factory": "./update-6_3"
-    },
-    "migration-04": {
-      "version": "7",
-      "factory": "./update-7"
-    },
-    "migration-05": {
-      "version": "8",
-      "factory": "./update-8"
+    ```json, title=package.json
+    {
+      "ng-update": {
+        "requirements": {
+          "my-lib": "^5"
+        },
+        "migrations": "./migrations/migration-collection.json"
+      }
     }
-  }
-}
-```
+    ```
 
+* steps
+  * create a migration collection == Schematics collection
+
+    ```json
+    {
+      "schematics": {
+        "migration-01": {
+          "version": "6",
+          "factory": "./update-6"
+        },
+        "migration-02": {
+          "version": "6.2",
+          "factory": "./update-6_2"
+        },
+        "migration-03": {
+          "version": "6.3",
+          "factory": "./update-6_3"
+        },
+        "migration-04": {
+          "version": "7",
+          "factory": "./update-7"
+        },
+        "migration-05": {
+          "version": "8",
+          "factory": "./update-8"
+        }
+      }
+    }
+    ```
+
+* TODO:
 The update tool would then read the current version of library installed, check against all `version` fields and run the schematics, until it reaches the version required by the user (inclusively).
 If such a collection is used to update from version 5 to version 7, the `01`, `02`, `03,` and `04` functions would be called.
 If the current version is 7 and a `--refactor-only` flag is passed, it would run the migration `04` only.
 More arguments are needed to know from which version you are updating.
 
-Running `ng update @angular/core` would be the same as `ng generate @angular/core/migrations:migration-01`.
+* if you run `ng update @angular/core` == run `ng generate @angular/core/migrations:migration-01`
 
 ## Use cases
 
