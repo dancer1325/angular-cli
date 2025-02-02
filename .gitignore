@@ -17,17 +17,7 @@ jsconfig.json
 
 # Intellij IDEA/WebStorm
 # https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-.idea/inspectionProfiles/
-.idea/**/compiler.xml
-.idea/**/encodings.xml
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
-
-# Also ignore code styles because .editorconfig is used instead.
-.idea/codeStyles/
+.idea/*
 
 # VSCode
 # https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
@@ -58,3 +48,9 @@ yarn-error.log*
 # Mac OSX Finder files.
 **/.DS_Store
 .DS_Store
+/.idea/.gitignore
+/.idea/angular-cli.iml
+/.idea/aws.xml
+/.idea/modules.xml
+/.idea/prettier.xml
+/.idea/vcs.xml
