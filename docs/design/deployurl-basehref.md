@@ -11,8 +11,11 @@
 | Relative fetch/XMLHttpRequest               |     ❌     |    ✅     |
 
 ✅ - has/affects the item/trait
-❌ - does not have/affect the item/trait
+❌ - NOT have/affect the item/trait
 👍 - favorable behavior
 👎 - unfavorable behavior
 
-\*1 -- Users with more complicated setups may need to manually configure the `APP_BASE_HREF` token within the application. (e.g., application routing base is `/` but assets/scripts/etc. are at `/assets/`)
+* 👀if you have MORE complicated setups -> MANUALLY configure the `APP_BASE_HREF` token | application👀
+  * _Example:_
+    * application routing base is `/`
+    * assets/scripts/etc. are | `/assets/`
