@@ -834,24 +834,29 @@ Added support for TypeScript 5.7
 
 ### @angular-devkit/build-angular
 
-- By default, the index.html file is no longer emitted in the browser directory when using the application builder with SSR. Instead, an index.csr.html file is emitted. This change is implemented because in many cases server and cloud providers incorrectly treat the index.html file as a statically generated page. If you still require the old behavior, you can use the `index` option to specify the `output` file name.
-
-  ```json
-  "architect": {
-    "build": {
-      "builder": "@angular-devkit/build-angular:application",
-      "options": {
-        "outputPath": "dist/my-app",
-        "index": {
-          "input": "src/index.html",
-          "output": "index.html"
+- if you use the application builder + SSR ->
+  - by default,
+    - ❌NO emitted index.html | browser directory ❌
+    - index.csr.html is emitted
+    - Reason: 🧠| MANY use cases, server & cloud providers treat -- the -- index.html == statically generated page🧠
+  - if you want to customize -> specify `architect.build.options.index.output`
+    ```json
+    "architect": {
+      "build": {
+        "builder": "@angular-devkit/build-angular:application",
+        "options": {
+          "outputPath": "dist/my-app",
+          "index": {
+            "input": "src/index.html",
+            "output": "index.html"
+          }
         }
       }
     }
-  }
-  ```
-
-- The support for the legacy Sass build pipeline, previously accessible via `NG_BUILD_LEGACY_SASS` when utilizing webpack-based builders, has been removed.
+    ```
+- | use webpack-based builders,
+  - ⚠️removed the support -- for the -- legacy Sass build pipeline  ⚠️
+    - == removed `NG_BUILD_LEGACY_SASS`
 
 ## Deprecations
 
