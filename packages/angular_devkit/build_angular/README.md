@@ -29,5 +29,5 @@
 * builders
   * if they are executed -- via the Angular CLI & their associated options -> are considered stable
 * programmatic APIs
-  * ⚠️NOT considered officially supported⚠️
+  * ❌️NOT considered officially supported ❌
   * NOT subject to the breaking change -- guarantees of -- SemVer
