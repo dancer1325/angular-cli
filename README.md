@@ -20,96 +20,17 @@
 
 ## Documentation
 
-* TODO:
-- [Getting started][quickstart]
-- [CLI][cli]
-- [Workspace and project file structure][filestructure]
-- [Workspace configuration][workspaceconfig]
-- [Schematics][schematics]
-
-## Development Setup
-
-### Prerequisites
-
-- Install [Node.js] which includes [Node Package Manager][npm]
-
-### Setting Up a Project
-
-Install the Angular CLI globally:
-
-```
-npm install -g @angular/cli
-```
-
-Create workspace:
-
-```
-ng new [PROJECT NAME]
-```
-
-Run the application:
-
-```
-cd [PROJECT NAME]
-ng serve
-```
-
-Angular is cross-platform, fast, scalable, has incredible tooling, and is loved by millions.
-
-## Quickstart
-
-[Get started in 5 minutes][quickstart].
-
-## Ecosystem
-
-<p>
-  <img src="/docs/images/angular-ecosystem-logos.png" alt="angular ecosystem logos" width="500px" height="auto">
-</p>
-
-- [Angular Framework][adev]
-- [Angular Material][angularmaterial]
-
-## Changelog
-
-[Learn about the latest improvements][changelog].
-
-## Upgrading
-
-Check out our [upgrade guide](https://update.angular.dev/) to find out the best way to upgrade your project.
-
-## Contributing
-
-### Contributing Guidelines
-
-Read through our [contributing guidelines][contributing] to learn about our submission process, coding rules and more.
-
-### Want to Help?
-
-Want to report a bug, contribute some code, or improve documentation? Excellent! Read up on our guidelines for [contributing][contributing] and then check out one of our issues labeled as <kbd>[help wanted](https://github.com/angular/angular-cli/labels/help%20wanted)</kbd> or <kbd>[good first issue](https://github.com/angular/angular-cli/labels/good%20first%20issue)</kbd>.
-
-### Code of Conduct
-
-Help us keep Angular open and inclusive. Please read and follow our [Code of Conduct][codeofconduct].
-
-### Developer Guide
-
-Read through our [developer guide][developer] to learn about how to build and test the Angular CLI locally.
-
-
-## Community
-
-Join the conversation and help the community.
-
-- [X (formerly Twitter)][twitter]
-- [Discord][discord]
-- [Gitter][gitter]
-- [YouTube][youtube]
-- [StackOverflow][stackoverflow]
-- Find a Local [Meetup][meetup]
+* [here](docs)
+* Angular documentation
+  * [CLI](https://github.com/dancer1325/angular/blob/main/adev/src/content/tools/cli/overview.md)
+  * [Workspace & project file structure](https://github.com/dancer1325/angular/blob/main/adev/src/content/reference/configs/file-structure.md)
+  * [Workspace configuration](https://github.com/dancer1325/angular/blob/main/adev/src/content/reference/configs/workspace-config.md)
+  * [Schematics](https://github.com/dancer1325/angular/blob/main/adev/src/content/tools/cli/schematics.md)
+  * [update guide](https://angular.dev/update-guide)
 
 ## Packages
 
-* this repo == monorepo / MANY tools & packages
+* 👀this repo == monorepo / MANY tools & packages 👀
 
 ### Tools
 
@@ -119,7 +40,6 @@ Join the conversation and help the community.
 **Angular CLI** | [`@angular/cli`](https://npmjs.com/package/@angular/cli) | [![latest](https://img.shields.io/npm/v/%40angular%2Fcli/latest.svg)](https://npmjs.com/package/@angular/cli) | [![README](https://img.shields.io/badge/README--green.svg)](/packages/angular/cli/README.md) [![snapshot](https://img.shields.io/badge/snapshot--blue.svg)](https://github.com/angular/cli-builds)
 **Architect CLI** | [`@angular-devkit/architect-cli`](https://npmjs.com/package/@angular-devkit/architect-cli) | [![latest](https://img.shields.io/npm/v/%40angular-devkit%2Farchitect-cli/latest.svg)](https://npmjs.com/package/@angular-devkit/architect-cli) |  [![snapshot](https://img.shields.io/badge/snapshot--blue.svg)](https://github.com/angular/angular-devkit-architect-cli-builds)
 **Schematics CLI** | [`@angular-devkit/schematics-cli`](https://npmjs.com/package/@angular-devkit/schematics-cli) | [![latest](https://img.shields.io/npm/v/%40angular-devkit%2Fschematics-cli/latest.svg)](https://npmjs.com/package/@angular-devkit/schematics-cli) |  [![snapshot](https://img.shields.io/badge/snapshot--blue.svg)](https://github.com/angular/angular-devkit-schematics-cli-builds)
-
 
 ### Packages
 
@@ -147,9 +67,6 @@ Join the conversation and help the community.
 **Angular PWA Schematics** | [`@angular/pwa`](https://npmjs.com/package/@angular/pwa) | [![latest](https://img.shields.io/npm/v/%40angular%2Fpwa/latest.svg)](https://npmjs.com/package/@angular/pwa) |  [![snapshot](https://img.shields.io/badge/snapshot--blue.svg)](https://github.com/angular/angular-pwa-builds)
 **Angular Schematics** | [`@schematics/angular`](https://npmjs.com/package/@schematics/angular) | [![latest](https://img.shields.io/npm/v/%40schematics%2Fangular/latest.svg)](https://npmjs.com/package/@schematics/angular) |  [![snapshot](https://img.shields.io/badge/snapshot--blue.svg)](https://github.com/angular/schematics-angular-builds)
 
-
-
-**Love Angular CLI? Give our repo a star :star: :arrow_up:.**
 
 [contributing]: CONTRIBUTING.md
 [developer]: docs/DEVELOPER.md
