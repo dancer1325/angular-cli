@@ -17,6 +17,8 @@
       * 's values [0, total]
     * `total`
       * == NEW total -- to -- set
+        * recommendations
+          * \# of files / -- to -- process
       * by default,
         * | start of a run == 1
       * if omitted -> 's value == last total
