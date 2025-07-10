@@ -2,21 +2,25 @@
 
 ## Goals
 
-Currently, a project scaffolded with the CLI has no way of specifying options and configurations affecting their projects. There are ways to affect the build (with the `angular-cli-build.js` file), but the following questions cannot be answered without actual project options:
+* | CURRENTLY,
+  * project / scaffolded -- via -- CLI
+    * ❌NO way of specifying options & configurations❌
+      * _Example:_
+        - where is
+          - "karma.conf" placed?
+          - my client code?
+    * affect the build -- via -- "angular-cli-build.js"
 
-- Where in my directory is my karma.conf file?
-- What is my firebase database URL?
-- Where is my client code?
-- How can I use a different lazy-loading boundary prefix (or none at all)?
-- Any other backend I want to run prior to `ng serve`?
 
 # Proposed Solution
 
-Since the data is static, we only need to keep it in a static store somewhere.
+* TODO: Since the data is static, we only need to keep it in a static store somewhere.
 
-One solution would be to keep the data in the `package.json`. Unfortunately, the metadata contains too much data and the `package.json` file would become unmanageable.
+One solution would be to keep the data in the `package.json`
+* Unfortunately, the metadata contains too much data and the `package.json` file would become unmanageable.
 
-Instead of polluting the package file, a `.angular-cli.json` file will be created that contains all the values. Access to that file will be allowed to the user if he knows the structure of the file (unknown keys will be kept but ignored), and it's easy to read and write.
+Instead of polluting the package file, a `.angular-cli.json` file will be created that contains all the values
+* Access to that file will be allowed to the user if he knows the structure of the file (unknown keys will be kept but ignored), and it's easy to read and write.
 
 ## Fallback
 
