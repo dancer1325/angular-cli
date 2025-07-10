@@ -11,7 +11,6 @@
           - my client code?
     * affect the build -- via -- "angular-cli-build.js"
 
-
 # Proposed Solution
 
 * TODO: Since the data is static, we only need to keep it in a static store somewhere.
@@ -40,22 +39,33 @@ Every PR that would change the schema should include the update to the `d.ts`.
 
 #### Getting values
 
-The new command `get` should be used to output values on the terminal. It takes a set of flags and an optional array of [paths](#path);
-
-- `--glob` or `-g`; the path follows a glob format, where `*` can be replaced by any amount of characters and `?` by a single character. This will output `name=value` for each values matched.
-
-Otherwise, outputs the value of the path passed in. If multiple paths are passed in, they follow the format of `name=value`.
+* `ng get`
+  * allows
+    * getting values / output | terminal
+  * ALLOWED arguments
+    * set of flags
+    * array of [paths](#patha-namepatha)
+      * OPTIONAL
+      * 👀if you specify MULTIPLE paths -> follow the format : `name=value`👀
+    - `--glob` or `-g`
+      - ⚠️ALTERNATIVE to EXACT `path`⚠️
+      - allows
+        - specifying glob pattern
+          - `*` == ANY amount of characters
+          - `?` == 1! character
 
 #### Setting values
 
-The new command `set` should be used to set values in the local configuration file. It takes a set of flags and an optional array of `[path](#path)=value`;
+The new command `set` should be used to set values in the local configuration file
+* It takes a set of flags and an optional array of `[path](#path)=value`;
 
 - `--global`; sets the value in the global configuration.
 - `--remove`; removes the key (no value should be passed in).
 
 The schema needs to be taken into account when setting the value of the field;
 
-- If the field is a number, the string received from the command line is parsed. `NaN` throws an error.
+- If the field is a number, the string received from the command line is parsed
+* `NaN` throws an error.
 - If the field is an object, an error is thrown.
 - If the path is inside an object but the object hasn't been defined yet, sets the object with empty values (use the schema to create a valid object).
 
@@ -69,12 +79,20 @@ An example is the following:
 
 ## Model
 
-A model should be created that will include loading and saving the configuration, including the global configuration.
+* recommendations
+  * 👀create a model👀 /
+    * part of the project
+    * created | `project` object
 
-**The model should be part of the project and created on the `project` object.**
+* uses
+  * load & save the configuration
 
-That model can be used internally by the tool to get information. It will include a proxy handler that throws if an operation doesn't respect the schema. It will also set values on globals and locals depending on which branches you access.
+* use cases
+  * internally, by the tool, -- to -- get information
+  * proxy handler / ⚠️if an operation does NOT respect the schema -> throws an error⚠️
+  * set values -- , depending on which branches you access, -- | globals or locals
 
+* TODO:
 A simple API would return the TypeScript interface:
 
 ```typescript
@@ -89,9 +107,12 @@ class Config {
 }
 ```
 
-The `local` and `global` getters return proxies that respect the JSON Schema defined for the Angular config. These proxies allow users to not worry about the existence of values; those values will only be created on disc when they are set.
+The `local` and `global` getters return proxies that respect the JSON Schema defined for the Angular config
+* These proxies allow users to not worry about the existence of values; those values will only be created on disc when they are set.
 
-Also, `local` will always defer to the same key-path in `global` if a value isn't available. If a value is set and the parent exists in `global`, it should be created to `local` such that it's saved locally to the project. The proxies only care about the end points of `local` and `global`, not the existence of a parent in either.
+Also, `local` will always defer to the same key-path in `global` if a value isn't available
+* If a value is set and the parent exists in `global`, it should be created to `local` such that it's saved locally to the project
+* The proxies only care about the end points of `local` and `global`, not the existence of a parent in either.
 
 For example, assuming the following globals/locals:
 
